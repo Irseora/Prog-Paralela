@@ -1,0 +1,103 @@
+[gd_scene load_steps=12 format=3 uid="uid://d1lag3if8q486"]
+
+[ext_resource type="Script" uid="uid://1avtsg5xannu" path="res://ball.gd" id="1_ho7oe"]
+[ext_resource type="Texture2D" uid="uid://cir054qm86v82" path="res://assets/Tiles/Characters/tile_0008.png" id="2_ho7oe"]
+[ext_resource type="Script" uid="uid://ujbvhj32ybu4" path="res://static_body_2d.gd" id="2_m2sqd"]
+[ext_resource type="Texture2D" uid="uid://bqch5p5hnvdqk" path="res://assets/Tiles/tile_0000.png" id="4_ho7oe"]
+[ext_resource type="Texture2D" uid="uid://dxglouxswjro5" path="res://assets/Backgrounds/backgroundColorGrass.png" id="5_nmhtg"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_m2sqd"]
+bounce = 5.85
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m2sqd"]
+radius = 62.6279
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p20re"]
+size = Vector2(395, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m2sqd"]
+size = Vector2(22.875, 521.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ho7oe"]
+size = Vector2(1146, 82)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ho7oe"]
+font_size = 42
+font_color = Color(1, 0, 0, 1)
+
+[node name="World" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(19, 15)
+
+[node name="ball" type="RigidBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_m2sqd")
+script = ExtResource("1_ho7oe")
+
+[node name="Icon" type="Sprite2D" parent="ball"]
+position = Vector2(3.8147e-06, 0.999994)
+scale = Vector2(2.20667, 2.20667)
+texture = ExtResource("2_ho7oe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ball"]
+scale = Vector2(0.427097, 0.427097)
+shape = SubResource("CircleShape2D_m2sqd")
+
+[node name="platform" type="StaticBody2D" parent="."]
+script = ExtResource("2_m2sqd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platform"]
+position = Vector2(-7.5, 201)
+shape = SubResource("RectangleShape2D_p20re")
+
+[node name="Icon" type="Sprite2D" parent="platform"]
+position = Vector2(-11, 201.5)
+scale = Vector2(21.8889, 1.16667)
+texture = ExtResource("4_ho7oe")
+
+[node name="border_left" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="border_left"]
+position = Vector2(-544.875, -30.25)
+shape = SubResource("RectangleShape2D_m2sqd")
+
+[node name="border_right" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="border_right"]
+position = Vector2(585.438, -22.625)
+shape = SubResource("RectangleShape2D_m2sqd")
+
+[node name="death" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="death"]
+position = Vector2(23, 308)
+shape = SubResource("RectangleShape2D_ho7oe")
+debug_color = Color(0.990868, 0, 0.272927, 0.42)
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -226.0
+offset_top = -35.0
+offset_right = 221.0
+offset_bottom = 33.0
+text = "YOU DIED"
+label_settings = SubResource("LabelSettings_ho7oe")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackgroundColorGrass" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(21, 53)
+scale = Vector2(1.12891, 1.12891)
+texture = ExtResource("5_nmhtg")
+
+[node name="Button" type="Button" parent="."]
+visible = false
+offset_left = -96.0
+offset_top = 53.0
+offset_right = 96.0
+offset_bottom = 86.0
+text = "RESET"
+
+[connection signal="body_entered" from="death" to="ball" method="_on_death_body_entered"]
+[connection signal="pressed" from="Button" to="ball" method="_on_button_pressed"]
