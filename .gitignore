@@ -1,19 +1,14 @@
-Web/tailwind test/node_modules/
+# Node
+**/node_modules/
+**/package-lock.json
 
+# Godot
 Game-Dev/Godot_v4.4-stable_win64.exe
-
-# Godot 4+ specific ignores
 **/.godot/
-
-# Godot-specific ignores
 **/.import/
 **/export.cfg
 **/export_credentials.cfg
-
-# Imported translations (automatically generated from CSV files)
 **/*.translation
-
-# Mono-specific ignores
 **/.mono/
 **/data_*/
 **/mono_crash.*.json
