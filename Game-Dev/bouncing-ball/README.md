@@ -6,17 +6,22 @@
 
 ## About The Project
 
-Bounce a red ball around in a forest. Bounce counter included, so make try to reach a high score!
+<div class="flex-container" style="display: flex;">
+  <div class="flex-child" style="flex: 1; margin-right: 20px;">
+    Bounce a red ball around in a forest. Bounce counter included, so make try to reach a high score!
+    <img src="./screenshots/ss1.png"/>
+  </div>
+  
+  <div class="flex-child" style="flex: 1;">
+    Try using the platform to move the ball around to different parts of the stage.
+    <img src="./screenshots/ss3.png"/>
+  </div>
+</div>
 
-<img src="./screenshots/ss1.png" width="500"/>
-
-Try using the platform to move the ball around to different parts of the stage.
-
-<img src="./screenshots/ss3.png" width="500"/>
-
-But make sure not to drop the ball, or else...
-
-<img src="./screenshots/ss2.png" width="500"/>
+<div align="center">
+    But make sure not to drop the ball, or else...
+    <img src="./screenshots/ss2.png" width="500"/>
+</div>
 
 ## Installation
 
