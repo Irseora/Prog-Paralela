@@ -12,7 +12,7 @@ Bounce a red ball around in a forest. Bounce counter included, so try to reach a
 Try using the platform to move the ball around to different parts of the stage.
 <img src="./screenshots/ss3.png" width="500"/>
 
-But make sure not to drop the ball, or else...
+But make sure not to drop the ball, or else...  
 <img src="./screenshots/ss2.png" width="500"/>
 
 ## Installation
