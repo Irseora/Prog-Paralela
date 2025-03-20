@@ -1,13 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://d1lag3if8q486"]
+[gd_scene load_steps=13 format=3 uid="uid://d1lag3if8q486"]
 
 [ext_resource type="Script" uid="uid://1avtsg5xannu" path="res://ball.gd" id="1_ho7oe"]
 [ext_resource type="Script" uid="uid://ujbvhj32ybu4" path="res://static_body_2d.gd" id="2_m2sqd"]
-[ext_resource type="Texture2D" uid="uid://co2wnq5c4gk4a" path="res://assets/Tiles/Characters/tile_0004.png" id="2_nmhtg"]
+[ext_resource type="Texture2D" uid="uid://cgdg8qt1ndfti" path="res://assets/ball_red_small.png" id="2_nmhtg"]
 [ext_resource type="Texture2D" uid="uid://dgusjxn6y55vn" path="res://ground.png" id="4_tq727"]
 [ext_resource type="Texture2D" uid="uid://dxglouxswjro5" path="res://assets/Backgrounds/backgroundColorGrass.png" id="5_nmhtg"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_m2sqd"]
-bounce = 5.85
+bounce = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m2sqd"]
 radius = 62.6279
@@ -25,18 +25,23 @@ size = Vector2(1146, 82)
 font_size = 42
 font_color = Color(1, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_nmhtg"]
+font_color = Color(0, 0, 0, 1)
+
 [node name="World" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(19, 15)
 
 [node name="ball" type="RigidBody2D" parent="."]
+position = Vector2(-1, 61)
 physics_material_override = SubResource("PhysicsMaterial_m2sqd")
+contact_monitor = true
+max_contacts_reported = 300
 script = ExtResource("1_ho7oe")
 
 [node name="Icon" type="Sprite2D" parent="ball"]
-position = Vector2(0, -1)
-scale = Vector2(2.22833, 2.27)
+scale = Vector2(0.826038, 0.841486)
 texture = ExtResource("2_nmhtg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ball"]
@@ -99,5 +104,14 @@ offset_right = 96.0
 offset_bottom = 86.0
 text = "RESET"
 
+[node name="Label2" type="Label" parent="."]
+offset_left = -509.0
+offset_top = -289.0
+offset_right = -469.0
+offset_bottom = -266.0
+text = "Bounced 0 times"
+label_settings = SubResource("LabelSettings_nmhtg")
+
+[connection signal="body_entered" from="ball" to="ball" method="_on_body_entered"]
 [connection signal="body_entered" from="death" to="ball" method="_on_death_body_entered"]
 [connection signal="pressed" from="Button" to="ball" method="_on_button_pressed"]
