@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://d1lag3if8q486"]
+[gd_scene load_steps=14 format=3 uid="uid://d1lag3if8q486"]
 
 [ext_resource type="Script" uid="uid://1avtsg5xannu" path="res://ball.gd" id="1_ho7oe"]
+[ext_resource type="Script" uid="uid://b1tckhkwk8y2y" path="res://camera_2d.gd" id="1_tq727"]
 [ext_resource type="Script" uid="uid://ujbvhj32ybu4" path="res://static_body_2d.gd" id="2_m2sqd"]
 [ext_resource type="Texture2D" uid="uid://cgdg8qt1ndfti" path="res://assets/ball_red_small.png" id="2_nmhtg"]
 [ext_resource type="Texture2D" uid="uid://dgusjxn6y55vn" path="res://ground.png" id="4_tq727"]
@@ -32,6 +33,7 @@ font_color = Color(0, 0, 0, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(19, 15)
+script = ExtResource("1_tq727")
 
 [node name="ball" type="RigidBody2D" parent="."]
 position = Vector2(-1, 61)
@@ -47,6 +49,20 @@ texture = ExtResource("2_nmhtg")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ball"]
 scale = Vector2(0.427097, 0.427097)
 shape = SubResource("CircleShape2D_m2sqd")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="ball"]
+emitting = false
+amount = 5
+texture = ExtResource("2_nmhtg")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.8
+randomness = 1.0
+emission_shape = 2
+emission_sphere_radius = 30.0
+scale_amount_min = 0.2
+scale_amount_max = 0.5
+color = Color(0, 0.73, 0.231167, 0.584314)
 
 [node name="platform" type="StaticBody2D" parent="."]
 script = ExtResource("2_m2sqd")
@@ -94,6 +110,18 @@ vertical_alignment = 1
 z_index = -1
 position = Vector2(21, 53)
 scale = Vector2(1.12891, 1.12891)
+texture = ExtResource("5_nmhtg")
+
+[node name="BackgroundColorGrass2" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(1251, 52)
+scale = Vector2(1.27444, 1.13086)
+texture = ExtResource("5_nmhtg")
+
+[node name="BackgroundColorGrass3" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-1290, 54)
+scale = Vector2(1.43873, 1.12891)
 texture = ExtResource("5_nmhtg")
 
 [node name="Button" type="Button" parent="."]

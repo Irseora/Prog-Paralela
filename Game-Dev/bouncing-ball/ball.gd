@@ -17,5 +17,12 @@ func _on_button_pressed() -> void:
 
 var collision_count = 0;
 func _on_body_entered(body):
+	# Camera shake
+	$"../Camera2D".shake();
+	
+	# Particles
+	$CPUParticles2D.emitting = true;
+	
+	# Bounce counter
 	collision_count += 1;
 	$"../Label2".text = "Bounced %d times" % collision_count;

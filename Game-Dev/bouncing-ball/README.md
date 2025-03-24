@@ -1,7 +1,6 @@
 <div align="center">
     <img src="./assets/ball_red_small.png"/>
     <h1 align="center">Bouncing Ball</h1>
-    
 </div>
 
 ## About The Project
