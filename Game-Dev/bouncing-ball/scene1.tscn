@@ -1,17 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://d1lag3if8q486"]
+[gd_scene load_steps=12 format=3 uid="uid://d1lag3if8q486"]
 
-[ext_resource type="Script" uid="uid://1avtsg5xannu" path="res://ball.gd" id="1_ho7oe"]
+[ext_resource type="Script" uid="uid://cx7srmmm3njmi" path="res://scene_1.gd" id="1_b6skf"]
 [ext_resource type="Script" uid="uid://b1tckhkwk8y2y" path="res://camera_2d.gd" id="1_tq727"]
 [ext_resource type="Script" uid="uid://ujbvhj32ybu4" path="res://static_body_2d.gd" id="2_m2sqd"]
-[ext_resource type="Texture2D" uid="uid://cgdg8qt1ndfti" path="res://assets/ball_red_small.png" id="2_nmhtg"]
+[ext_resource type="PackedScene" uid="uid://b1ld72ixcvykd" path="res://ball.tscn" id="3_tq727"]
 [ext_resource type="Texture2D" uid="uid://dgusjxn6y55vn" path="res://ground.png" id="4_tq727"]
 [ext_resource type="Texture2D" uid="uid://dxglouxswjro5" path="res://assets/Backgrounds/backgroundColorGrass.png" id="5_nmhtg"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_m2sqd"]
-bounce = 1.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_m2sqd"]
-radius = 62.6279
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p20re"]
 size = Vector2(395, 20)
@@ -30,39 +24,13 @@ font_color = Color(1, 0, 0, 1)
 font_color = Color(0, 0, 0, 1)
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_b6skf")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(19, 15)
 script = ExtResource("1_tq727")
-
-[node name="ball" type="RigidBody2D" parent="."]
-position = Vector2(-1, 61)
-physics_material_override = SubResource("PhysicsMaterial_m2sqd")
-contact_monitor = true
-max_contacts_reported = 300
-script = ExtResource("1_ho7oe")
-
-[node name="Icon" type="Sprite2D" parent="ball"]
-scale = Vector2(0.826038, 0.841486)
-texture = ExtResource("2_nmhtg")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ball"]
-scale = Vector2(0.427097, 0.427097)
-shape = SubResource("CircleShape2D_m2sqd")
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="ball"]
-emitting = false
-amount = 5
-texture = ExtResource("2_nmhtg")
-lifetime = 0.5
-one_shot = true
-explosiveness = 0.8
-randomness = 1.0
-emission_shape = 2
-emission_sphere_radius = 30.0
-scale_amount_min = 0.2
-scale_amount_max = 0.5
-color = Color(0, 0.73, 0.231167, 0.584314)
 
 [node name="platform" type="StaticBody2D" parent="."]
 script = ExtResource("2_m2sqd")
@@ -75,6 +43,8 @@ shape = SubResource("RectangleShape2D_p20re")
 position = Vector2(-7.50001, 201)
 scale = Vector2(0.342882, 0.263158)
 texture = ExtResource("4_tq727")
+
+[node name="ball" parent="." instance=ExtResource("3_tq727")]
 
 [node name="border_left" type="StaticBody2D" parent="."]
 
@@ -140,6 +110,4 @@ offset_bottom = -266.0
 text = "Bounced 0 times"
 label_settings = SubResource("LabelSettings_nmhtg")
 
-[connection signal="body_entered" from="ball" to="ball" method="_on_body_entered"]
-[connection signal="body_entered" from="death" to="ball" method="_on_death_body_entered"]
-[connection signal="pressed" from="Button" to="ball" method="_on_button_pressed"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_completed"]

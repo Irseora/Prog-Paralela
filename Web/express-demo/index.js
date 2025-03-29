@@ -9,6 +9,8 @@ const port = 3000;
 app.use(bodyParser.json());
 
 let users = [];
+users.push({ id: 1, username: "aaa", password: "111" });
+users.push({ id: 2, username: "bbb", password: "222" });
 
 // Add a new user (through postman)
 app.post("/user", (req, res) => {
